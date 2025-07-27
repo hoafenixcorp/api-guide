@@ -142,3 +142,28 @@ google-cloud-dialogflow-cx
 
 ## Deploy
 
+Search Cloud Run và truy cập dashboard
+
+<img width="3584" height="1144" alt="image" src="https://github.com/user-attachments/assets/6d2a23ff-102a-4826-8b93-fe21b5762363" />
+
+Chọn Write a function và setup thông số như sau
+
+<img width="879" height="940" alt="Screenshot 2025-07-27 at 18 08 40" src="https://github.com/user-attachments/assets/37d873f9-3a0b-4be7-82b3-98052996e067" />
+
+Copy code vào, save & deploy
+
+<img width="1545" height="659" alt="Screenshot 2025-07-27 at 18 09 49" src="https://github.com/user-attachments/assets/6a49a107-39ed-4b46-873b-5d4951cc5200" />
+
+* Note: function name và Function entry point phải trùng nhau
+
+Copy Function URL và setup để thực hiện API call từ 3CX
+
+ví dụ cURL
+
+```bash
+curl --location '{proxy_api_function_URL}' \
+--header 'Content-Type: application/json' \
+--data '{
+    "prompt":"［3CXの質問］: 会員番号を読んでください。［答え］: 会員です、番号は 四〇六七〇 です。［ホットライン]：08054321068"
+}'
+```
