@@ -126,3 +126,25 @@
 
 Endgame cho MemberCodeVerification
 ---
+
+### 2.2 Thiết lập các Flow còn lại
+
+Dựa trên hướng dẫn cho MemberCodeVerification, chúng ta sẽ làm tương tự cho EventVerification hoặc những logic khác
+Mình chỉ hướng dẫn cách để setup các flow theo tree format
+
+Tạo EventVerification Flow và EventVerification Page
+
+<img width="278" height="617" alt="Screenshot 2025-07-27 at 17 46 56" src="https://github.com/user-attachments/assets/662e01a3-5200-4a97-b46d-46e2093c3c26" />
+
+Quay lại `Start Page` của MemberCodeVerification Flow
+Ta sẽ thêm intent của event verification vào đây, và transition đến EventVerification Page
+
+<img width="826" height="868" alt="Screenshot 2025-07-27 at 17 48 31" src="https://github.com/user-attachments/assets/f6b1c015-a105-4e2c-9f6d-ee792463be61" />
+
+Expect output sau khi setup xong sẽ trông như thế này
+<img width="248" height="263" alt="Screenshot 2025-07-27 at 17 49 51" src="https://github.com/user-attachments/assets/aa672d46-0035-42e9-ad31-942c94308d4d" />
+<img width="471" height="141" alt="Screenshot 2025-07-27 at 17 50 16" src="https://github.com/user-attachments/assets/50bafea6-460b-4123-a480-ee43b727573a" />
+
+---
+
+## END
