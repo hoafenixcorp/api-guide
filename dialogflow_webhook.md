@@ -135,7 +135,16 @@ $sessionParams (array): Một mảng kết hợp chứa các tham số cần đ�
 Request
 ```json
 {
-    "prompt":"［3CXの質問］: 会員番号を読んでください。［答え］: 会員です、番号は 1 2 3 4 5 です。［ホットライン]：08054321068"
+    "sessionInfo": {
+      "parameters": {
+        "member_id": "12345",
+        "hotline": "0123455679",
+      }
+    },
+    "session": "projects/your-project-id/locations/your-location/agents/your-agent-id/sessions/your-session-id-123",
+    "intentInfo": {
+      "lastMatchedIntent": "projects/your-project-id/locations/your-location/agents/your-agent-id/intents/VerifyMemberCodeIntent"
+    }
 }
 ```
 Response
@@ -154,7 +163,7 @@ Response
   },
   "sessionInfo": {
     "parameters": {
-      "business_status": "success",
+      "status": true,
       "club_id": "ABCD",
       "member_code": "12345",
       "name": "江戸川 コナン"
@@ -166,15 +175,39 @@ Response
 Request
 ```json
 {
-    "prompt":"［3CXの質問］: 会員番号を読んでください。［答え］: 会員です、番号は 四〇六七〇 です。［ホットライン]：08054321068"
+    "sessionInfo": {
+      "parameters": {
+        "member_id": "400",
+        "hotline": "0123455679",
+      }
+    },
+    "session": "projects/your-project-id/locations/your-location/agents/your-agent-id/sessions/your-session-id-123",
+    "intentInfo": {
+      "lastMatchedIntent": "projects/your-project-id/locations/your-location/agents/your-agent-id/intents/VerifyMemberCodeIntent"
+    }
 }
 ```
 Response
 ```json
 {
-    "bot_reply_text": "会員コード 40670 は無効です。確認して再度お試しください。",
-    "dialogflow_intent": "member.code.verification",
-    "session_id": "5a7cfaa8-c7bf-410d-9779-09eb1d84709e",
-    "status": "fail"
+   "fulfillmentResponse":{
+      "messages":[
+         {
+            "text":{
+               "text":[
+                  "会員コード 400 は無効です。確認して再度お試しください。"
+               ]
+            }
+         }
+      ]
+   },
+   "sessionInfo":{
+      "parameters":{
+         "member_code":"400",
+         "club_id":"ABCD",
+         "name":"江戸川 コナン",
+         "status":false
+      }
+   }
 }
 ```
