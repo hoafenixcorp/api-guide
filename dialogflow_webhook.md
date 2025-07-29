@@ -138,7 +138,7 @@ Request
     "sessionInfo": {
       "parameters": {
         "member_id": "12345",
-        "hotline": "0123455679",
+        "hotline": "0123455679"
       }
     },
     "session": "projects/your-project-id/locations/your-location/agents/your-agent-id/sessions/your-session-id-123",
@@ -209,5 +209,42 @@ Response
          "status":false
       }
    }
+}
+```
+
+---
+
+## 4. AI matching function integration
+
+Với event verification flow, dùng function này để thực hiện việc tìm event chính xacs nhất từ event list (query từ DB) so với event name được gửi từ prompt của 3CX
+
+cURL mẫu
+
+```bash
+curl --location '{lien_he_de_hoi_url_chinh_xac_khong_nen_public}' \
+--header 'Content-Type: application/json' \
+--data '{
+    "event_name_stt": "にほんおんがくさい",
+    "list_event_name_db": [
+        "日本音楽祭",
+        "Japan Music Fair",
+        "Tokyo Rock Festival"
+    ]
+}'
+```
+
+Case matched:
+
+```json
+{
+    "matched_event_name": "日本音楽祭"
+}
+```
+
+Case unmatched:
+
+```json
+{
+    "matched_event_name": "No Match"
 }
 ```
