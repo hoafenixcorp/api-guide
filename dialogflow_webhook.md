@@ -216,19 +216,21 @@ Response
 
 ## 4. AI matching function integration
 
-Với event verification flow, dùng function này để thực hiện việc tìm event chính xacs nhất từ event list (query từ DB) so với event name được gửi từ prompt của 3CX
-
+#### 4.1 Với event verification flow, dùng function này để thực hiện việc tìm event chính xacs nhất từ event list (query từ DB) so với event name được gửi từ prompt của 3CX
 cURL mẫu
 
 ```bash
 curl --location '{lien_he_de_hoi_url_chinh_xac_khong_nen_public}' \
 --header 'Content-Type: application/json' \
 --data '{
-    "event_name_stt": "にほんおんがくさい",
+    "matching_type": "event",
+    "event_name_stt": "さくらフェスティバル 二千二十五年",
     "list_event_name_db": [
-        "日本音楽祭",
-        "Japan Music Fair",
-        "Tokyo Rock Festival"
+        "Sakura Festival 2025",
+        "Summer Rock Concert 2025",
+        "Autumn Leaves Festival 2025",
+        "Cherry Blossom Festival 2025",
+        "Sakura Matsuri 2025"
     ]
 }'
 ```
@@ -237,7 +239,7 @@ Case matched:
 
 ```json
 {
-    "matched_event_name": "日本音楽祭"
+    "matched_name": "Sakura Festival 2025"
 }
 ```
 
@@ -245,6 +247,51 @@ Case unmatched:
 
 ```json
 {
-    "matched_event_name": "No Match"
+    "matched_name": "No Match"
 }
 ```
+
+#### 4.2 Với booking event flow, dùng function này để lấy tìm vé chính xác nhất từ ticket_list query từ DB
+
+cURL mẫu
+
+```bash
+curl --location '{lien_he_de_hoi_url_chinh_xac_khong_nen_public}' \
+--header 'Content-Type: application/json' \
+--data '{
+    "matching_type": "ticket",
+    "ticket_name_stt": ["FC限定S席", "FC限定A席"],
+    "list_ticket_name_db": [
+        "FC限定S席",
+        "FC限定A席",
+        "FC限定一般",
+        "一般S席",
+        "一般A席",
+        "チケットFC限定S席"
+    ]
+}'
+```
+
+Case matched:
+
+```json
+{
+    "matched_names": [
+        "FC限定S席",
+        "FC限定A席"
+    ]
+}
+```
+
+Case unmatched:
+
+```json
+{
+    "matched_names": [
+        "No Match",
+        "No Match"
+    ]
+}
+```
+
+---
